@@ -54,7 +54,6 @@ export default function HistoryView({ device, onBack }) {
 
   useEffect(() => {
     fetchHistory(fromDate, toDate);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [floor, meter]);
 
   const handleApplyFilter = (e) => {
@@ -114,7 +113,7 @@ export default function HistoryView({ device, onBack }) {
       {/* Date Filter Bar */}
       <div className="p-3 sm:p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
         <form onSubmit={handleApplyFilter} className="flex flex-wrap items-center gap-2 sm:gap-3 flex-1">
-          <div className="flex items-center gap-2 flex-1 min-w-[140px]">
+          <div className="flex items-center gap-2 flex-1 min-w-35">
             <span className="text-xs uppercase font-semibold text-slate-400">From</span>
             <input
               type="date"
@@ -122,10 +121,10 @@ export default function HistoryView({ device, onBack }) {
               max={todayStr}
               value={fromDate}
               onChange={(e) => setFromDate(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-400"
+              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
             />
           </div>
-          <div className="flex items-center gap-2 flex-1 min-w-[140px]">
+          <div className="flex items-center gap-2 flex-1 min-w-35">
             <span className="text-xs uppercase font-semibold text-slate-400">To</span>
             <input
               type="date"
@@ -133,7 +132,7 @@ export default function HistoryView({ device, onBack }) {
               max={todayStr}
               value={toDate}
               onChange={(e) => setToDate(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-hidden focus:border-cyan-400"
+              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:ring-2 focus:ring-cyan-400/50"
             />
           </div>
           <button type="submit" className="cursor-pointer w-full sm:w-auto px-5 py-2 rounded-xl text-xs font-semibold bg-cyan-600 hover:bg-cyan-500 text-white transition-colors shadow-xs">
@@ -174,7 +173,7 @@ export default function HistoryView({ device, onBack }) {
       {!loading && (
         <>
           {/* Energy Summary Hero Card */}
-          <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-cyan-950/40 via-slate-900/90 to-slate-950/90 border border-cyan-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="p-5 sm:p-6 rounded-2xl bg-linear-to-br from-cyan-950/40 via-slate-900/90 to-slate-950/90 border border-cyan-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <span className="text-xs text-slate-400 uppercase font-semibold tracking-wider flex items-center gap-2">
                 <Zap className="w-4 h-4 text-cyan-400" /> Electricity Consumed
@@ -201,7 +200,7 @@ export default function HistoryView({ device, onBack }) {
               <span className="text-xs text-slate-400 font-mono">{data?.readingsCount ?? 0} records found</span>
             </div>
             {data && data.readings && data.readings.length > 0 ? (
-              <div className="space-y-2 max-h-[500px] overflow-y-auto pr-1">
+              <div className="space-y-2 max-h-125 overflow-y-auto pr-1">
                 {data.readings
                   .slice()
                   .reverse()

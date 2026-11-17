@@ -15,7 +15,7 @@ export default function Header({ brokerUrl, status }) {
 
         {/* Logo + Title */}
         <div className="flex items-center gap-3 min-w-0">
-          <div className="p-2 rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 border border-cyan-500/25 shrink-0">
+          <div className="p-2 rounded-xl bg-linear-to-br from-cyan-500/20 to-cyan-500/5 border border-cyan-500/25 shrink-0">
             <Zap className="w-5 h-5 text-cyan-400" />
           </div>
           <h1 className="text-base sm:text-lg font-bold text-white tracking-tight">
@@ -28,7 +28,7 @@ export default function Header({ brokerUrl, status }) {
           {/* Broker URL — hidden on mobile */}
           <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-800 bg-slate-950/60 text-xs font-mono">
             <span className="text-slate-500">broker</span>
-            <span className="text-cyan-300 truncate max-w-[260px]">{brokerUrl}</span>
+            <span className="text-cyan-300 truncate max-w-65">{brokerUrl}</span>
           </div>
 
           {/* Connection Status */}
