@@ -44,6 +44,18 @@ export default function HistoryView({ device, onBack }) {
   minAllowedDate.setDate(minAllowedDate.getDate() - 45);
   const minDateStr = formatDateForInput(minAllowedDate);
 
+  const past7Str = (() => {
+    const d = new Date();
+    d.setDate(d.getDate() - 7);
+    return formatDateForInput(d);
+  })();
+
+  const past30Str = (() => {
+    const d = new Date();
+    d.setDate(d.getDate() - 30);
+    return formatDateForInput(d);
+  })();
+
   const [fromDate, setFromDate] = useState(todayStr);
   const [toDate, setToDate] = useState(todayStr);
   const [page, setPage] = useState(1);
@@ -226,14 +238,22 @@ export default function HistoryView({ device, onBack }) {
           <button
             type="button"
             onClick={() => handleSetQuickPastDays(7)}
-            className="cursor-pointer flex-1 md:flex-none px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-950 text-slate-400 hover:text-white border border-slate-850 transition-colors"
+            className={`cursor-pointer flex-1 md:flex-none px-3 py-1.5 rounded-xl text-xs font-medium transition-colors ${
+              fromDate === past7Str && toDate === todayStr
+                ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
+                : "bg-slate-950 text-slate-400 hover:text-white border border-slate-850"
+            }`}
           >
             7d
           </button>
           <button
             type="button"
             onClick={() => handleSetQuickPastDays(30)}
-            className="cursor-pointer flex-1 md:flex-none px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-950 text-slate-400 hover:text-white border border-slate-850 transition-colors"
+            className={`cursor-pointer flex-1 md:flex-none px-3 py-1.5 rounded-xl text-xs font-medium transition-colors ${
+              fromDate === past30Str && toDate === todayStr
+                ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
+                : "bg-slate-950 text-slate-400 hover:text-white border border-slate-850"
+            }`}
           >
             30d
           </button>
@@ -283,7 +303,7 @@ export default function HistoryView({ device, onBack }) {
               </span>
               <div className="text-4xl sm:text-5xl font-extrabold font-mono text-cyan-300 mt-2">
                 {(Number(data.totalKWh) || 0).toFixed(2)}{" "}
-                <span className="text-lg font-normal text-slate-400">kWh</span>
+                <span className="text-lg font-normal text-slate-400">Units</span>
               </div>
               <span className="text-xs text-slate-500 flex items-center gap-1.5 mt-1.5">
                 <Calendar className="w-3.5 h-3.5 text-slate-400" />
@@ -294,7 +314,7 @@ export default function HistoryView({ device, onBack }) {
             </div>
             <div className="sm:text-right border-t sm:border-t-0 border-slate-800 pt-3 sm:pt-0">
               <span className="text-xs text-slate-400 font-mono block">
-                1 unit = 1 kWh · Calculated from real-time integration
+                1 Unit = 1 kWh · Estimated Real Power
               </span>
             </div>
           </div>
