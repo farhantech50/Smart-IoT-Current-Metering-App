@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Activity, Power, Zap, History } from 'lucide-react';
+import { estimateRealPower } from '../utils/power';
 
 export default function DeviceCard({ device, onToggleRelay, onViewHistory }) {
   const { floor, meter, current, power, relayOn, lastSeen } = device;
@@ -94,14 +95,14 @@ export default function DeviceCard({ device, onToggleRelay, onViewHistory }) {
             </div>
           </div>
 
-          {/* Power: formatted to 1 decimal place with "W" unit */}
+          {/* Power: formatted to 1 decimal place with "W" unit (estimated real power) */}
           <div className="rounded-xl bg-slate-950/80 border border-slate-800/80 p-3">
             <div className="flex items-center gap-1 text-[11px] font-medium text-slate-400 uppercase tracking-wider mb-1">
               <Zap className="w-3.5 h-3.5 text-amber-400" />
               <span>Power</span>
             </div>
             <div className="text-xl font-bold font-mono text-amber-300">
-              {(power || 0).toFixed(1)} W
+              {estimateRealPower(power).toFixed(1)} W
             </div>
           </div>
         </div>

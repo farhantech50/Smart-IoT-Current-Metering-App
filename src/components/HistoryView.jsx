@@ -8,6 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { estimateRealPower } from "../utils/power";
 
 const API_BASE =
   import.meta.env.VITE_BACKEND_API_URL || "https://localhost:5000";
@@ -360,7 +361,7 @@ export default function HistoryView({ device, onBack }) {
                         {r.current.toFixed(2)} A
                       </span>
                       <span className="text-amber-400 font-semibold">
-                        {r.power.toFixed(1)} W
+                        {estimateRealPower(r.power).toFixed(1)} W
                       </span>
                       <span
                         className={`px-2 py-0.5 rounded-md text-[11px] font-bold ${

@@ -5,6 +5,7 @@ import FloorSelector from './components/FloorSelector';
 import DeviceCard from './components/DeviceCard';
 import HistoryView from './components/HistoryView';
 import { Activity, Zap, Layers, Wifi } from 'lucide-react';
+import { estimateRealPower } from './utils/power';
 
 export default function App() {
   const { brokerUrl, status, devices, toggleRelay } = useMqtt();
@@ -27,8 +28,8 @@ export default function App() {
     }
   }
 
-  // Calculate totals for the selected floor
-  const totalFloorPower = floorDevices.reduce((sum, d) => sum + (d.power || 0), 0);
+  // Calculate totals for the selected floor (estimated real power)
+  const totalFloorPower = floorDevices.reduce((sum, d) => sum + estimateRealPower(d.power), 0);
   const totalFloorCurrent = floorDevices.reduce((sum, d) => sum + (d.current || 0), 0);
   const activeCount = floorDevices.filter(
     (d) => d.relayOn && d.lastSeen !== null && Date.now() - d.lastSeen < 15000
